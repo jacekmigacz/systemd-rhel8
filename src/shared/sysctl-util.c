@@ -60,12 +60,12 @@ int sysctl_write(const char *property, const char *value) {
         return 0;
 }
 
-int sysctl_read(const char *property, char **content) {
+int sysctl_read(const char *property, char **ret) {
         char *p;
 
         assert(property);
-        assert(content);
+        assert(ret);
 
         p = strjoina("/proc/sys/", property);
-        return read_full_file(p, content, NULL);
+        return read_full_virtual_file(p, ret, NULL);
 }
